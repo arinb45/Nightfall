@@ -1,0 +1,147 @@
+[gd_scene load_steps=10 format=3 uid="uid://8kwymo5i48jb"]
+
+[ext_resource type="PackedScene" uid="uid://dvok5hymgdt2g" path="res://models/flashlight.glb" id="1_yydpp"]
+[ext_resource type="Script" path="res://flashlight.gd" id="2_66vkr"]
+[ext_resource type="AudioStream" uid="uid://blh0cjpiqy0fa" path="res://audio/flashlight-clicking-on-105809.mp3" id="3_50snp"]
+[ext_resource type="AudioStream" uid="uid://f5ivnfemddg2" path="res://audio/flashlight-click-46073.mp3" id="4_ejpyn"]
+[ext_resource type="AudioStream" uid="uid://d2qg8k32gxc5h" path="res://audio/item-equip-6904.mp3" id="5_1xg5n"]
+
+[sub_resource type="Animation" id="Animation_nd2ox"]
+resource_name = "equip"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.397935, 3.14159, 0), Vector3(0, 3.14159, 0)]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cylinder")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, -3.92862, -1.65047, 1, 1, 0, 0, -1.65047)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cube_001")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, -2.868, -1.575, 0.97, 1, 0, 1.061, -1.575)
+tracks/3/type = "position_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cube")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, -3.192, -2.225, 0.99, 1, 0, 0.741, -2.225)
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SpotLight3D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -3.92862, -7.33613), Vector3(0, 0, -7.33613)]
+}
+
+[sub_resource type="Animation" id="Animation_iont8"]
+resource_name = "off"
+step = 0.01
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube_001")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 1.061, -2.736, 0.5, 1, 0, 1.061, -1.575)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpotLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.47, 0.48, 0.49),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [30.0, 60.0, 0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_8tyt7"]
+resource_name = "on"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube_001")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 1.06062, -1.57459, 0.5, 1, 0, 1.06062, -2.7364)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpotLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 8.0, 0.0, 20.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1sffj"]
+_data = {
+"equip": SubResource("Animation_nd2ox"),
+"off": SubResource("Animation_iont8"),
+"on": SubResource("Animation_8tyt7")
+}
+
+[node name="flashlight" instance=ExtResource("1_yydpp")]
+transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
+script = ExtResource("2_66vkr")
+
+[node name="Cylinder" parent="." index="0"]
+transform = Transform3D(1.11956, 0, 0, 0, -2.64194e-07, -1.11956, 0, 6.04405, -4.89375e-08, 0, 0, -1.65047)
+
+[node name="Cube_001" parent="." index="1"]
+transform = Transform3D(0.321589, 0, 0, 0, 0.168451, -3.72529e-09, 0, 3.72529e-09, 0.168451, 0, 1.06062, -1.57459)
+
+[node name="Cube" parent="." index="2"]
+transform = Transform3D(0.344377, 0, 0, 0, 0.249482, 0, 0, 0, 1.01344, 0, 0.741, -2.225)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_1sffj")
+}
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="4"]
+transform = Transform3D(0.997784, 0, 0.0665351, 0, 1, 0, -0.0665351, 0, 0.997784, 0, 0, -7.33613)
+light_energy = 0.0
+light_indirect_energy = 0.5
+light_volumetric_fog_energy = 0.01
+shadow_enabled = true
+spot_range = 466.922
+spot_angle = 30.788
+
+[node name="on" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource("3_50snp")
+volume_db = 5.0
+
+[node name="off" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource("4_ejpyn")
+volume_db = 5.0
+
+[node name="equip" type="AudioStreamPlayer" parent="." index="7"]
+stream = ExtResource("5_1xg5n")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,0 +1,443 @@
+[gd_scene load_steps=41 format=3 uid="uid://cyjj43c14e23o"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_544e2"]
+[ext_resource type="FontFile" uid="uid://epkh3akdcqwt" path="res://assests/font/Daydream.ttf" id="1_qspu7"]
+[ext_resource type="PackedScene" uid="uid://nkujiqv45k6o" path="res://models/wendigo-col.glb" id="3_3ffj1"]
+[ext_resource type="Material" uid="uid://dceoqrb2wmkmr" path="res://materials/grass.tres" id="3_id4p1"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter.gd" id="4_vhk8i"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="5_m4diy"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="6_mmdrg"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="7_tcucn"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="8_fiwlg"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="9_818sp"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_item.gd" id="10_yhl40"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="11_fktd3"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="12_j4lsi"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="13_lox8q"]
+[ext_resource type="AudioStream" uid="uid://bp5b5nd30p54p" path="res://audio/cutscene audio/rain-sound-188158.mp3" id="14_vflyg"]
+[ext_resource type="AudioStream" uid="uid://b615kh72f3f64" path="res://audio/cutscene audio/loud-thunder-192165.mp3" id="15_i6rsx"]
+[ext_resource type="Texture2D" uid="uid://diw1ln53xr5dc" path="res://icon.svg" id="15_ngrmh"]
+
+[sub_resource type="Resource" id="Resource_wxk7c"]
+script = ExtResource("6_mmdrg")
+amount = 250
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_kqbxu"]
+script = ExtResource("7_tcucn")
+position = Vector3(0.15, 0.15, 0.15)
+rotation = Vector3(5, 360, 10)
+scale = Vector3(0.1, 0.1, 0.1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_3ypih"]
+script = ExtResource("8_fiwlg")
+iterations = 3
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+use_computeshader = true
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_kvbof"]
+script = ExtResource("9_818sp")
+ray_direction = Vector3(0, -1, 0)
+ray_length = 5.0
+ray_offset = 5.0
+remove_points_on_miss = false
+align_with_collision_normal = false
+max_slope = 90.0
+collision_mask = 1
+exclude_mask = 0
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_jy7o4"]
+script = ExtResource("5_m4diy")
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_wxk7c"), SubResource("Resource_kqbxu"), SubResource("Resource_3ypih"), SubResource("Resource_kvbof")])
+
+[sub_resource type="Resource" id="Resource_mq702"]
+script = ExtResource("12_j4lsi")
+size = Vector3(30, 1, 30)
+
+[sub_resource type="Resource" id="Resource_rm6ow"]
+script = ExtResource("13_lox8q")
+radius = 1.0
+
+[sub_resource type="Resource" id="Resource_vreyr"]
+script = ExtResource("6_mmdrg")
+amount = 250
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_vmnci"]
+script = ExtResource("7_tcucn")
+position = Vector3(0.15, 0.15, 0.15)
+rotation = Vector3(5, 360, 10)
+scale = Vector3(0.1, 0.1, 0.1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_b5mhn"]
+script = ExtResource("8_fiwlg")
+iterations = 3
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+use_computeshader = true
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_6ejwc"]
+script = ExtResource("9_818sp")
+ray_direction = Vector3(0, -1, 0)
+ray_length = 5.0
+ray_offset = 5.0
+remove_points_on_miss = false
+align_with_collision_normal = false
+max_slope = 90.0
+collision_mask = 1
+exclude_mask = 0
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_0hrjh"]
+script = ExtResource("5_m4diy")
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_vreyr"), SubResource("Resource_vmnci"), SubResource("Resource_b5mhn"), SubResource("Resource_6ejwc")])
+
+[sub_resource type="Resource" id="Resource_gghoq"]
+script = ExtResource("12_j4lsi")
+size = Vector3(30, 1, 30)
+
+[sub_resource type="Resource" id="Resource_ide05"]
+script = ExtResource("13_lox8q")
+radius = 1.0
+
+[sub_resource type="Gradient" id="Gradient_wr5ff"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_klfds"]
+gradient = SubResource("Gradient_wr5ff")
+fill_from = Vector2(1, 0.516484)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_mkh01"]
+night_sky = SubResource("GradientTexture2D_klfds")
+
+[sub_resource type="Sky" id="Sky_78ae1"]
+sky_material = SubResource("PhysicalSkyMaterial_mkh01")
+
+[sub_resource type="Environment" id="Environment_cpqty"]
+background_mode = 1
+sky = SubResource("Sky_78ae1")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+sdfgi_enabled = true
+glow_enabled = true
+glow_bloom = 0.04
+glow_blend_mode = 0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1
+adjustment_enabled = true
+adjustment_saturation = 1.79
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7itmt"]
+transparency = 1
+albedo_color = Color(0, 0.462745, 0.192157, 0.486275)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y26bc"]
+size = Vector3(0.025, 0.25, 0.025)
+
+[sub_resource type="Animation" id="Animation_qftmj"]
+resource_name = "intro"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("black:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/WorldMenu/WorldMenu/DirectionalLight3D:light_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4.9, 5, 5.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.309804, 0.309804, 0.309804, 1), Color(1, 1, 1, 1), Color(0.309804, 0.309804, 0.309804, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/WorldMenu/thunder:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(4.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/WorldMenu/rain:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(-1.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xayka"]
+_data = {
+"intro": SubResource("Animation_qftmj")
+}
+
+[node name="StartMenu" type="CanvasLayer"]
+script = ExtResource("1_544e2")
+
+[node name="Background" type="Node3D" parent="."]
+
+[node name="wendigo-col" parent="Background" instance=ExtResource("3_3ffj1")]
+transform = Transform3D(0.0247108, 0, -0.0135002, 0, 0.0281581, 0, 0.0135002, 0, 0.0247108, 0.386229, 0.182149, 0.811789)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="Background/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 720)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Background/SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.0357662, -0.000179321, 0.99936, 0.000953068, 1, 0.000213545, -0.99936, 0.000960096, -0.035766, 11.9321, 1.04103, 2.6217)
+
+[node name="WorldMenu" type="Node3D" parent="Background"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Background/WorldMenu"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50581, 0)
+material_override = ExtResource("3_id4p1")
+size = Vector3(30, 1, 30)
+
+[node name="ProtonScatter" type="Node3D" parent="Background/WorldMenu"]
+script = ExtResource("4_vhk8i")
+modifier_stack = SubResource("Resource_jy7o4")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+
+[node name="ScatterItem" type="Node3D" parent="Background/WorldMenu/ProtonScatter"]
+script = ExtResource("10_yhl40")
+proportion = 70
+path = "res://addons/proton_scatter/demos/assets/bush.tscn"
+
+[node name="ScatterItem2" type="Node3D" parent="Background/WorldMenu/ProtonScatter"]
+script = ExtResource("10_yhl40")
+proportion = 10
+path = "res://addons/proton_scatter/demos/assets/large_rock.tscn"
+
+[node name="ScatterItem3" type="Node3D" parent="Background/WorldMenu/ProtonScatter"]
+script = ExtResource("10_yhl40")
+source_scale_multiplier = 5.0
+path = "res://addons/proton_scatter/demos/assets/pine_tree.tscn"
+
+[node name="ScatterShape" type="Node3D" parent="Background/WorldMenu/ProtonScatter"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
+script = ExtResource("11_fktd3")
+shape = SubResource("Resource_mq702")
+
+[node name="ScatterShape2" type="Node3D" parent="Background/WorldMenu/ProtonScatter"]
+transform = Transform3D(1.2559, 0, -3.74287e-08, 0, 5.67881, 0, 3.74287e-08, 0, 1.2559, 0.327476, 0.243326, 1.0984)
+script = ExtResource("11_fktd3")
+negative = true
+shape = SubResource("Resource_rm6ow")
+
+[node name="WorldMenu" type="Node3D" parent="Background/WorldMenu"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Background/WorldMenu/WorldMenu"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50581, 0)
+material_override = ExtResource("3_id4p1")
+size = Vector3(30, 1, 30)
+
+[node name="ProtonScatter" type="Node3D" parent="Background/WorldMenu/WorldMenu"]
+script = ExtResource("4_vhk8i")
+modifier_stack = SubResource("Resource_0hrjh")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+
+[node name="ScatterItem" type="Node3D" parent="Background/WorldMenu/WorldMenu/ProtonScatter"]
+script = ExtResource("10_yhl40")
+proportion = 70
+path = "res://addons/proton_scatter/demos/assets/bush.tscn"
+
+[node name="ScatterItem2" type="Node3D" parent="Background/WorldMenu/WorldMenu/ProtonScatter"]
+script = ExtResource("10_yhl40")
+proportion = 10
+path = "res://addons/proton_scatter/demos/assets/large_rock.tscn"
+
+[node name="ScatterItem3" type="Node3D" parent="Background/WorldMenu/WorldMenu/ProtonScatter"]
+script = ExtResource("10_yhl40")
+source_scale_multiplier = 5.0
+path = "res://addons/proton_scatter/demos/assets/pine_tree.tscn"
+
+[node name="ScatterShape" type="Node3D" parent="Background/WorldMenu/WorldMenu/ProtonScatter"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 2.52571, 0, 2.98023e-08, 0, 1, 0, 0, 0)
+script = ExtResource("11_fktd3")
+shape = SubResource("Resource_gghoq")
+
+[node name="ScatterShape2" type="Node3D" parent="Background/WorldMenu/WorldMenu/ProtonScatter"]
+transform = Transform3D(1.2559, 0, -3.74287e-08, 0, 5.67881, 0, 3.74287e-08, 0, 1.2559, 0.327476, 0.243326, 1.0984)
+script = ExtResource("11_fktd3")
+negative = true
+shape = SubResource("Resource_ide05")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Background/WorldMenu/WorldMenu"]
+environment = SubResource("Environment_cpqty")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Background/WorldMenu/WorldMenu"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 24.8992, 0)
+light_color = Color(0.309804, 0.309804, 0.309804, 1)
+light_energy = 0.5
+
+[node name="rain" type="AudioStreamPlayer" parent="Background/WorldMenu"]
+stream = ExtResource("14_vflyg")
+volume_db = -25.0
+
+[node name="thunder" type="AudioStreamPlayer" parent="Background/WorldMenu"]
+stream = ExtResource("15_i6rsx")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Background/WorldMenu"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.35589, 0)
+material_override = SubResource("StandardMaterial3D_7itmt")
+amount = 50000
+lifetime = 10.0
+mesh = SubResource("BoxMesh_y26bc")
+emission_shape = 3
+emission_box_extents = Vector3(50, 1, 50)
+direction = Vector3(0, -1, 0)
+spread = 3.0
+initial_velocity_min = 6.0
+initial_velocity_max = 10.0
+angle_min = 45.0
+angle_max = 45.0
+color = Color(0.148, 0.841, 0.191, 0.207)
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.631373, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_qspu7")
+theme_override_font_sizes/font_size = 45
+text = "NightFAll"
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 80
+
+[node name="StartButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.631373, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_qspu7")
+theme_override_font_sizes/font_size = 30
+text = "Play"
+flat = true
+alignment = 0
+
+[node name="CreditsButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.631373, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_qspu7")
+theme_override_font_sizes/font_size = 30
+text = "credits"
+flat = true
+alignment = 0
+
+[node name="QuitButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.631373, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_qspu7")
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+flat = true
+alignment = 0
+
+[node name="black" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = 1
+position = Vector2(591, 361)
+scale = Vector2(10.3281, 6.8125)
+texture = ExtResource("15_ngrmh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xayka")
+}
+
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

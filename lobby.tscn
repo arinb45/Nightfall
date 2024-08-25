@@ -1,0 +1,232 @@
+[gd_scene load_steps=27 format=3 uid="uid://c7cym25oa8mgn"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_myv4h"]
+[ext_resource type="PackedScene" uid="uid://nkujiqv45k6o" path="res://models/wendigo-col.glb" id="2_5j80q"]
+[ext_resource type="Material" uid="uid://dceoqrb2wmkmr" path="res://materials/grass.tres" id="3_jni2w"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter.gd" id="4_0yq5u"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="5_sh7fy"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="6_c80x7"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="7_ingja"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="8_000cu"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="9_70ndb"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_item.gd" id="10_r5f0o"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="11_sblyk"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="12_0bcul"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="13_rmj1o"]
+[ext_resource type="FontFile" uid="uid://epkh3akdcqwt" path="res://assests/font/Daydream.ttf" id="14_kbe5r"]
+
+[sub_resource type="Resource" id="Resource_haxnt"]
+script = ExtResource("6_c80x7")
+amount = 250
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_yk8dx"]
+script = ExtResource("7_ingja")
+position = Vector3(0.15, 0.15, 0.15)
+rotation = Vector3(5, 360, 10)
+scale = Vector3(0.1, 0.1, 0.1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_kdn1m"]
+script = ExtResource("8_000cu")
+iterations = 3
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+use_computeshader = true
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_5jg4p"]
+script = ExtResource("9_70ndb")
+ray_direction = Vector3(0, -1, 0)
+ray_length = 5.0
+ray_offset = 5.0
+remove_points_on_miss = false
+align_with_collision_normal = false
+max_slope = 90.0
+collision_mask = 1
+exclude_mask = 0
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_qqlpw"]
+script = ExtResource("5_sh7fy")
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_haxnt"), SubResource("Resource_yk8dx"), SubResource("Resource_kdn1m"), SubResource("Resource_5jg4p")])
+
+[sub_resource type="Resource" id="Resource_8xaqh"]
+script = ExtResource("12_0bcul")
+size = Vector3(30, 1, 30)
+
+[sub_resource type="Resource" id="Resource_81hcx"]
+script = ExtResource("13_rmj1o")
+radius = 1.0
+
+[sub_resource type="Gradient" id="Gradient_wiuoo"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_704uh"]
+gradient = SubResource("Gradient_wiuoo")
+fill_from = Vector2(1, 0.516484)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_85h1x"]
+night_sky = SubResource("GradientTexture2D_704uh")
+
+[sub_resource type="Sky" id="Sky_rfyx2"]
+sky_material = SubResource("PhysicalSkyMaterial_85h1x")
+
+[sub_resource type="Environment" id="Environment_ojiva"]
+background_mode = 1
+sky = SubResource("Sky_rfyx2")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+sdfgi_enabled = true
+glow_enabled = true
+glow_blend_mode = 0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1
+
+[node name="Lobby" type="CanvasLayer"]
+script = ExtResource("1_myv4h")
+
+[node name="Background" type="Node3D" parent="."]
+
+[node name="wendigo-col" parent="Background" instance=ExtResource("2_5j80q")]
+transform = Transform3D(0.0247108, 0, -0.0135002, 0, 0.0281581, 0, 0.0135002, 0, 0.0247108, 0.386229, 0.182149, 0.811789)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="Background/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 720)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Background/SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.0357668, -0.00017932, 0.99936, 0.000953068, 1, 0.000213545, -0.99936, 0.000960096, -0.0357666, 14.2221, 1.04103, 2.6217)
+fov = 41.2735
+
+[node name="WorldMenu" type="Node3D" parent="Background"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Background/WorldMenu"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50581, 0)
+material_override = ExtResource("3_jni2w")
+size = Vector3(30, 1, 30)
+
+[node name="ProtonScatter" type="Node3D" parent="Background/WorldMenu"]
+script = ExtResource("4_0yq5u")
+modifier_stack = SubResource("Resource_qqlpw")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+
+[node name="ScatterItem" type="Node3D" parent="Background/WorldMenu/ProtonScatter"]
+script = ExtResource("10_r5f0o")
+proportion = 70
+path = "res://addons/proton_scatter/demos/assets/bush.tscn"
+
+[node name="ScatterItem2" type="Node3D" parent="Background/WorldMenu/ProtonScatter"]
+script = ExtResource("10_r5f0o")
+proportion = 10
+path = "res://addons/proton_scatter/demos/assets/large_rock.tscn"
+
+[node name="ScatterItem3" type="Node3D" parent="Background/WorldMenu/ProtonScatter"]
+script = ExtResource("10_r5f0o")
+source_scale_multiplier = 5.0
+path = "res://addons/proton_scatter/demos/assets/pine_tree.tscn"
+
+[node name="ScatterShape" type="Node3D" parent="Background/WorldMenu/ProtonScatter"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 2.52571, 0, 2.98023e-08, 0, 1, 0, 0, 0)
+script = ExtResource("11_sblyk")
+shape = SubResource("Resource_8xaqh")
+
+[node name="ScatterShape2" type="Node3D" parent="Background/WorldMenu/ProtonScatter"]
+transform = Transform3D(1.2559, 0, -3.74287e-08, 0, 5.67881, 0, 3.74287e-08, 0, 1.2559, 0.327476, 0.243326, 1.0984)
+script = ExtResource("11_sblyk")
+negative = true
+shape = SubResource("Resource_81hcx")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Background/WorldMenu"]
+environment = SubResource("Environment_ojiva")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Background/WorldMenu"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 24.8992, 0)
+light_color = Color(0.309804, 0.309804, 0.309804, 1)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.631373, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_kbe5r")
+theme_override_font_sizes/font_size = 45
+text = "NightFAll"
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 80
+
+[node name="Create" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.631373, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_kbe5r")
+theme_override_font_sizes/font_size = 30
+text = "Create a
+Lobby"
+flat = true
+alignment = 0
+
+[node name="Join" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.631373, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_kbe5r")
+theme_override_font_sizes/font_size = 30
+text = "Join a 
+Lobby"
+flat = true
+alignment = 0
+
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Create" to="." method="_on_create_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Create" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]
